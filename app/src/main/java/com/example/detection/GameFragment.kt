@@ -76,30 +76,26 @@ class GameFragment : Fragment() {
     }
 
     private fun submitLogic(): Int {
-        when {
-            questionIndex+1 < numQuestions -> {
-                val checkedId = binding.questionRadioGroup.checkedRadioButtonId
-                val answerIndex: Int = when(checkedId){
-                    R.id.firstAnsRadioButton -> 0
-                    R.id.secondAnsRadioButton -> 1
-                    R.id.thirdAnsRadioButton -> 2
-                    R.id.forthAnsRadioButton -> 3
-                    else -> -1
-                }
-
-                // If no answer is given or an incorrect answer is given
-                // GameOver
-                if (answerIndex == -1 || answers[answerIndex] != currentQuestion.answers[0])
-                    return 0
-
-
-
-                questionIndex++
-                setQuestions(questionIndex)
-                return -1
-            }
-            else -> return 1
+        questionIndex++
+        val checkedId = binding.questionRadioGroup.checkedRadioButtonId
+        val answerIndex: Int = when(checkedId){
+            R.id.firstAnsRadioButton -> 0
+            R.id.secondAnsRadioButton -> 1
+            R.id.thirdAnsRadioButton -> 2
+            R.id.forthAnsRadioButton -> 3
+            else -> -1
         }
+
+        // If no answer is given or an incorrect answer is given
+        // GameOver
+        if (answerIndex == -1 || answers[answerIndex] != currentQuestion.answers[0])
+            return 0
+
+        if (questionIndex >= numQuestions) return 1
+
+        setQuestions(questionIndex)
+        return -1
+
     }
 
     // randomize question and set the first question
