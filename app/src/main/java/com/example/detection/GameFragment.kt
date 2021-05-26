@@ -21,7 +21,7 @@ class GameFragment : Fragment() {
 
 
         private val questions = mutableListOf(
-        Question("What is the color of the jetpack?", listOf("Green", "Blue", "Red", "White")),
+        Question("What is the color of the mascot?", listOf("Green", "Blue", "Red", "White")),
         Question(text = "What is Android Jetpack?",
             answers = listOf("all of these", "tools", "documentation", "libraries")),
         Question(text = "Base class for Layout?",
@@ -65,9 +65,9 @@ class GameFragment : Fragment() {
         binding.submitButton.setOnClickListener { view: View ->
             val passed = submitLogic()
             if (passed == 1)
-            view.findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+            view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
             else if(passed == 0)
-            view.findNavController().navigate(R.id.action_gameFragment_to_gameOverFragment2)
+            view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment2())
             else
                 binding.invalidateAll()
 

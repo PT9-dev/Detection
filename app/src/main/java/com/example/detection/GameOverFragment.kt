@@ -5,16 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+import androidx.navigation.Navigation.createNavigateOnClickListener
 import com.example.detection.databinding.FragmentGameOverBinding
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GameOverFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class GameOverFragment : Fragment() {
 
     override fun onCreateView(
@@ -22,9 +19,10 @@ class GameOverFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentGameOverBinding>(inflater, R.layout.fragment_game_over, container, false)
-        binding.tryAgainButton.setOnClickListener {view: View ->
-            view.findNavController().navigate(R.id.action_gameOverFragment2_to_gameFragment)
-        }
+        binding.tryAgainButton.setOnClickListener (
+            createNavigateOnClickListener(R.id.action_gameOverFragment2_to_gameFragment)
+        )
+        (activity as AppCompatActivity).supportActionBar?.title = "Game Over"
 
         return  binding.root
     }
